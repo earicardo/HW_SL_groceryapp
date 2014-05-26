@@ -1,0 +1,9 @@
+<h1>Grocery List</h1>
+  <input type="text" ng-model="query"/>
+  <input type="checkbox" ng-model="isHealty"/>
+  <table class="table table-striped">
+    <tr ng-repeat="item in list | filter : {name: query, healthy:isHealty} " ng-class="{ complete: item.complete, healthy: item.healthy }">
+      <td><input type="checkbox" ng-click="clicked(item)" ng-checked=" item.complete"></td>
+      <td>{{item['name']}}</td>
+    </tr>    
+  </table>
