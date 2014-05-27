@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140526234019) do
+ActiveRecord::Schema.define(version: 20140527181240) do
 
   create_table "lists", force: true do |t|
     t.string   "title"
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_healthy"
   end
 
 end
