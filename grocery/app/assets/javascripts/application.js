@@ -19,10 +19,32 @@
 //= require_tree .
 
 
-var groceryApp = angular.module('groceryApp', []);
+var groceryApp = angular.module('groceryApp', ['ngResource']);
 
-groceryApp.controller('ListCtrl', function($scope){  
-console.log($scope)
+groceryApp.config(function ($httpProvider) {
+  // CSRF
+  $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
+});
+
+groceryApp.factory('List', function($resource) {
+  return $resource("/lists/:id.json", {id: '@id'}, {
+    update: {
+      method: 'PUT'
+    },
+	remove:{
+		method: 'DELETE'
+	},
+	save:{
+		method: 'POST'
+	}	
+  })
+});
+
+
+groceryApp.controller('ListCtrl', function($scope, List){  
+$scope.list = List.query();
+console.log($scope.list);
+/*
   $scope.list = [
     {name: 'A bag of potato chips', healthy: false, complete: true},
     {name: 'Beets', healthy: true},
@@ -30,9 +52,12 @@ console.log($scope)
     {name: 'Hot Pockets', healthy: false},
     {name: 'Cashews', healthy: true}
   ];
+  */
   
   $scope.clicked = function(item) {    
     item.complete = !item.complete;
+	List.update(item);
+
   };
 });
 //test

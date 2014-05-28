@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527181240) do
+ActiveRecord::Schema.define(version: 20140528021902) do
 
   create_table "lists", force: true do |t|
     t.string   "title"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140527181240) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_healthy"
+    t.boolean  "complete"
   end
 
 end
